@@ -10,8 +10,9 @@ func Route() {
 	v1 := route.Group("/v1")
 	{
 		v1.POST("/login", server.UserLogin)
+		v1.GET("/ping", server.Ping)
 
 	}
 
-	route.Run("8083")
+	route.Run(":8083")
 }
