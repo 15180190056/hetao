@@ -1,8 +1,9 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	v1 "gin_start/api/v1"
+)
 
 func main() {
-	r := gin.Default()
-
+	v1.Route()
 }
