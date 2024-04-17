@@ -5,33 +5,29 @@ import (
 	"net/http"
 )
 
-type LoginForm struct {
-	Username string `json:"username" binding:"required"`
-	Password string `json:"password" binding:"required"`
+type LoginData struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
 
-func UserLogin(c *gin.Context) {
-	// 从请求中获取数据，例如从POST请求体中解析JSON数据
-	// ...
+// 定义处理POST请求的handler函数
+func Handlelogin(c *gin.Context) {
+	// 创建一个LoginData实例
+	var loginData LoginData
 
-	user := c.PostForm("username")
-	passwd := c.PostForm("password")
-	var userloginform = LoginForm{
-		Username: user,
-		Password: passwd,
+	// 绑定JSON数据到结构体
+	if err := c.ShouldBindJSON(&loginData); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
 	}
-	var dbuserform = LoginForm{
+
+	// 在这里处理登录逻辑，例如验证用户名和密码
+	var userdata = LoginData{
 		Username: "hetao",
 		Password: "123456",
 	}
-	// 处理逻辑
-	// ...
-	if userloginform == dbuserform {
-		// 发送响应数据
-		c.JSON(http.StatusOK, gin.H{
-			"status":  "success",
-			"message": "User logged in successfully",
-		})
+	if loginData == userdata {
+		// 返回响应
+		c.JSON(http.StatusOK, gin.H{"status": "success"})
 	}
-
 }
