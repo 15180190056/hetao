@@ -13,7 +13,6 @@ type LoginForm struct {
 func UserLogin(c *gin.Context) {
 	// 从请求中获取数据，例如从POST请求体中解析JSON数据
 	// ...
-
 	user := c.PostForm("username")
 	passwd := c.PostForm("password")
 	var userloginform = LoginForm{
