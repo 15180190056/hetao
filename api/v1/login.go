@@ -1,7 +1,6 @@
 package v1
 
 import (
-	"gin_start/server"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -29,12 +28,47 @@ func Route() {
 			c.Next()
 		}
 	})
-	v1 := route.Group("/v1")
-	{
-		v1.POST("/login", server.Handlelogin)
-		v1.GET("/ping", server.Ping)
 
+	//商品管理
+	goods := route.Group("goods")
+	{
+		//添加商品信息
+		goods.POST("/AddProduct", goods.AddProduct)
+		//商品编辑
+		goods.POST("/EditProduct", goods.EditProduct)
+		//商品上架
+		goods.POST("/ShelveProduct", goods.ShelveProduct)
+		//商品下架
+		goods.POST("/UnshelveProduct", goods.UnshelveProduct)
 	}
 
+	//订单管理
+	order := route.Group("order")
+	{
+		// 打印所有订单信息
+		order.GET("list", order.PrintAllOrders)
+		//修改订单信息
+		order.GET("list", order.UpdateOrderStatus)
+		// 查询订单
+		order.GET("list", order.GetOrder)
+		// 删除订单  DeleteOrder
+		order.GET("list", order.DeleteOrder)
+		// 添加订单  AddOrder
+		order.GET("list", order.AddOrder)
+	}
+
+	//用户管理
+	user := route.Group("user")
+	{
+		// 注册新用户
+		user.POST("/RegisterUser", user.RegisterUser)
+		// 用户登录
+		user.POST("/LoginUser", user.LoginUser)
+		// 更新用户信息
+		user.POST("/UpdateUser", user.UpdateUser)
+		// 删除用户
+		user.POST("/DeleteUser", user.DeleteUser)
+
+	}
 	route.Run(":8083")
 }
