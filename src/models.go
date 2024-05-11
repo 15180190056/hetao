@@ -1,43 +1,48 @@
 package src
 
-import "gorm.io/gorm"
-
-type (
-	// User 对应 users 表
-	User struct {
-		gorm.Model
-		Username string
-		Password string
-		Email    string
-		Phone    string
-	}
-	// Product 对应 products 表
-	Product struct {
-		gorm.Model
-		Name        string
-		Description string
-		Price       float64
-		Stock       int
-	}
-	// Order 是数据库中的订单模型
-	Order struct {
-		gorm.Model
-		UserID    uint
-		ProductID uint
-		Quantity  int
-		Status    string
-	}
-	// Category 是数据库中的产品分类模型
-	Category struct {
-		gorm.Model
-		Name     string
-		Products []Product `gorm:"foreignkey:CategoryID"`
-	}
-	// Profile 是数据库中的用户个人资料模型
-	Profile struct {
-		gorm.Model
-		UserID   uint
-		Address  string
-		Birthday string
-	}
+import (
+	"gorm.io/gorm"
 )
+
+// User 是数据库中的用户模型
+type User struct {
+	gorm.Model
+	Username string `gorm:"unique"`
+	Password string
+	Email    string
+	Phone    string `gorm:"unique"`
+}
+
+//
+//// Product 对应数据库中的products表
+//type Product struct {
+//	gorm.Model
+//	Code  string
+//	Price uint
+//	// 添加CategoryID作为外键
+//	CategoryID uint `gorm:"column:category_id;ForeignKey:References"`
+//}
+
+//// Order 是数据库中的订单模型
+//type Order struct {
+//	gorm.Model
+//	UserID    uint
+//	ProductID uint
+//	Quantity  int
+//	Status    string
+//}
+
+// Category 对应数据库中的categories表
+//type Category struct {
+//	gorm.Model
+//	Name     string    `gorm:"column:name"`
+//	Products []Product `gorm:"foreignkey:CategoryID"` // 指定外键为Product中的CategoryID
+//}
+
+// Profile 是数据库中的用户个人资料模型
+//type Profile struct {
+//	gorm.Model
+//	UserID   uint
+//	Address  string
+//	Birthday string
+//}

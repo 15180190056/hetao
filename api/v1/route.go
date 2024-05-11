@@ -30,34 +30,6 @@ func Route() {
 		}
 	})
 
-	//商品管理
-	goods := route.Group("goods")
-	{
-		//添加商品信息
-		goods.POST("/AddProduct", src.AddCategory)
-		//商品编辑
-		goods.POST("/EditProduct", src.EditProduct)
-		//商品上架
-		goods.POST("/ShelveProduct", src.ShelveProduct)
-		//商品下架
-		goods.POST("/UnshelveProduct", src.UnshelveProduct)
-	}
-
-	//订单管理
-	order := route.Group("order")
-	{
-		// 打印所有订单信息
-		order.GET("list", src.PrintAllOrders)
-		//修改订单信息
-		order.GET("list", src.UpdateOrderStatus)
-		// 查询订单
-		order.GET("list", src.GetOrder)
-		// 删除订单  DeleteOrder
-		order.GET("list", src.DeleteOrder)
-		// 添加订单  AddOrder
-		order.GET("list", src.AddOrder)
-	}
-
 	//用户管理
 	user := route.Group("user")
 	{
@@ -71,5 +43,34 @@ func Route() {
 		user.POST("/DeleteUser", src.DeleteUser)
 
 	}
+
+	////商品管理
+	//goods := route.Group("goods")
+	//{
+	//	//添加商品信息
+	//	goods.POST("/AddProduct", tmp.AddCategory)
+	//	//商品编辑
+	//	goods.POST("/EditProduct", tmp.EditProduct)
+	//	//商品上架
+	//	goods.POST("/ShelveProduct", tmp.ShelveProduct)
+	//	//商品下架
+	//	goods.POST("/UnshelveProduct", tmp.UnshelveProduct)
+	//}
+	//
+	////订单管理
+	//order := route.Group("order")
+	//{
+	//	// 打印所有订单信息
+	//	order.GET("list", src.PrintAllOrders)
+	//	//修改订单信息
+	//	order.GET("list", src.UpdateOrderStatus)
+	//	// 查询订单
+	//	order.GET("list", src.GetOrder)
+	//	// 删除订单  DeleteOrder
+	//	order.GET("list", src.DeleteOrder)
+	//	// 添加订单  AddOrder
+	//	order.GET("list", src.AddOrder)
+	//}
+
 	route.Run(":8083")
 }
